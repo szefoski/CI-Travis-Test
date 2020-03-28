@@ -1,6 +1,11 @@
 language: c++
 compiler: gcc
 dist: trusty
+addons:
+  sonarcloud:
+    organization: "szefoski" # the key of the org you chose at step #3
+    token:
+      secure: "$SONAR_TOKEN" # encrypted value of your token
 script:
-    - echo $TESTTEST
-    - echo "Druga linia"
+    - build-wrapper-linux-x86-64 --out-dir bw-output make
+    - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output
