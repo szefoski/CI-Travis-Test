@@ -3,3 +3,4 @@ compiler: gcc
 dist: trusty
 script:
     - echo $TESTTEST
+    - echo "Druga linia"
