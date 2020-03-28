@@ -7,7 +7,6 @@ addons:
     token: ${SONAR_TOKEN}
 script:
     - build-wrapper-linux-x86-64 --out-dir bw-output make
-      #- sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output -X
     - ls
     - ls bin
     - ls bw-output
