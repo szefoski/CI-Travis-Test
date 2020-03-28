@@ -8,3 +8,9 @@ addons:
 script:
     - build-wrapper-linux-x86-64 --out-dir bw-output make
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output -X
+deploy:
+  provider: releases
+  token: ${GITHUB_TOKEN}
+  file: bin/program
+  on:
+    tags: true
