@@ -19,7 +19,7 @@ script:
 deploy:
   provider: releases
   token: ${GITHUB_TOKEN}
-  file: ./bin/program
+  file: ./bin/program2
   skip_cleanup: true
   overwrite: true
   name: Jakis tytul
