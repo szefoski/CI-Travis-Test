@@ -1,6 +1,11 @@
 language: c++
 compiler: gcc
 dist: trusty
+env:
+  global:
+    - DEPLOY_TAG_FEATURE=deploy/feature
+    - DEPLOY_TAG_DEV=deploy/dev
+    - DEPLOY_TAG_STABLE=deploy/stable
 addons:
   sonarcloud:
     organization: "szefoski" # the key of the org you chose at step #3
@@ -17,4 +22,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: $TRAVIS_TAG == "deploy-feature"
+    condition: $TRAVIS_TAG == "$DEPLOY_TAG_FEATURE"
