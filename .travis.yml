@@ -23,4 +23,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: $TRAVIS_TAG == "deploy/feature"
+    condition: $TRAVIS_TAG == "$DEPLOY_TAG_FEATURE"
