@@ -22,4 +22,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: $travis_tag == "$DEPLOY_TAG_FEATURE" || $travis_tag == "$DEPLOY_TAG_FEATURE" 
+    condition: $travis_tag == "$DEPLOY_TAG_FEATURE"
