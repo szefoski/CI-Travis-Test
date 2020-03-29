@@ -15,6 +15,7 @@ script:
     - ls
     - ls bin
     - ls bw-output
+    - echo $TRAVIS_TAG
 deploy:
   provider: releases
   token: ${GITHUB_TOKEN}
@@ -22,4 +23,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
-    condition: $travis_tag == deploy/feature
+    condition: $TRAVIS_TAG == "deploy/feature"
