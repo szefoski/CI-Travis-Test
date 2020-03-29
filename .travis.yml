@@ -16,4 +16,5 @@ deploy:
   file: ./bin/program
   skip_cleanup: true
   on:
+    tags: true
     condition: $TRAVIS_TAG == "deploy-feature"
