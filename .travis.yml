@@ -21,6 +21,7 @@ deploy:
   token: ${GITHUB_TOKEN}
   file: ./bin/program
   skip_cleanup: true
+  overwrite: true
   on:
     tags: true
     condition: $TRAVIS_TAG == "$DEPLOY_TAG_FEATURE" || $TRAVIS_TAG == "$DEPLOY_TAG_DEV" || $TRAVIS_TAG == "$DEPLOY_TAG_STABLE"
