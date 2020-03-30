@@ -12,6 +12,8 @@ addons:
     packages:
       - python3-pip
 # command to install dependencies
+before_install:
+  - sudo apt-get -y install python3-pip
 install:
   - pip3 install requests
 # command to run tests
