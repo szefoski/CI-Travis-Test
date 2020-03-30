@@ -1,11 +1,12 @@
-language: c++
+os: linux
+language: cpp
 compiler: gcc
 dist: trusty
 python:
   - "3.6"      # current default Python on Travis CI
 # command to install dependencies
 install:
-  - pip install requests
+  - pip3 install requests
 # command to run tests
 env:
   global:
