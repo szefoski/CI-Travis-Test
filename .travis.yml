@@ -16,6 +16,9 @@ script:
     - ls bin
     - ls bw-output
     - echo $TRAVIS_TAG
+before_deploy:
+    - curl https://raw.githubusercontent.com/szefoski/githubhoping/cd538b435785a3e827642440312824b62726e1d2/githubhoping.py --output githubhoping.py
+    - python3 ./githubhoping.py szefoski ci-travis-test $TRAVIS_TAG ${GITHUB_TOKEN}
 deploy:
   provider: releases
   token: ${GITHUB_TOKEN}
