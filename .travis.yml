@@ -1,9 +1,16 @@
+notifications:
+    email: false
 os: linux
 language: cpp
 compiler: gcc
 dist: trusty
 python:
   - "3.6"      # current default Python on Travis CI
+addons:
+  apt:
+    update: true
+    packages:
+      - python3-pip
 # command to install dependencies
 install:
   - pip3 install requests
