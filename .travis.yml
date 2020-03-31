@@ -4,6 +4,10 @@ os: linux
 language: cpp
 compiler: gcc
 dist: trusty
+before_install:
+  - sudo apt-get -y install python3-pip
+install:
+  - pip3 install requests
 env:
   global:
     - DEPLOY_TAG_FEATURE=deploy/feature
@@ -19,6 +23,11 @@ script:
     - ls bin
     - ls bw-output
     - echo $TRAVIS_TAG
+before_deploy:
+    #download a script
+    - curl https://raw.githubusercontent.com/szefoski/githubhoping/cd538b435785a3e827642440312824b62726e1d2/githubhoping.py --output githubhoping.py
+    #delete old release from GitHub
+    #- python3 ./githubhoping.py szefoski ci-travis-test $TRAVIS_TAG ${GITHUB_TOKEN}
 deploy:
   provider: releases
   token: ${GITHUB_TOKEN}
@@ -26,7 +35,7 @@ deploy:
   cleanup: false
   overwrite: true
   name: Jakis tytul
-  release_notes: cos tam Jakies notki 
+  release_notes: "cos tam" Jakies notki 
   on:
     tags: true
     condition: $TRAVIS_TAG == "$DEPLOY_TAG_FEATURE" || $TRAVIS_TAG == "$DEPLOY_TAG_DEV" || $TRAVIS_TAG == "$DEPLOY_TAG_STABLE"
