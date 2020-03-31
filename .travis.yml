@@ -17,16 +17,15 @@ addons:
     organization: "szefoski" # the key of the org you chose at step #3
     token: ${SONAR_TOKEN}
 script:
+    #download a script
+    - curl https://raw.githubusercontent.com/szefoski/githubhoping/c2a14e284cf9d5082631e021edc409cc380b6836/githubhoping.py --output githubhoping.py
+    #delete old release from GitHub
+    - if [[ $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE" ]] ; then python3 ./githubhoping.py szefoski ci-travis-test $TRAVIS_TAG $GITHUB_TOKEN ; fi
     - build-wrapper-linux-x86-64 --out-dir bw-output make
     - ls
     - ls bin
     - ls bw-output
     - echo $TRAVIS_TAG
-before_deploy:
-    #download a script
-    - curl https://raw.githubusercontent.com/szefoski/githubhoping/c2a14e284cf9d5082631e021edc409cc380b6836/githubhoping.py --output githubhoping.py
-    #delete old release from GitHub
-    - if [[ $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE" ]] ; then python3 ./githubhoping.py szefoski ci-travis-test $TRAVIS_TAG $GITHUB_TOKEN ; fi
 deploy:
   provider: releases
   token: ${GITHUB_TOKEN}
