@@ -25,7 +25,7 @@ script:
     - echo $TRAVIS_TAG
 before_deploy:
     #download a script
-    #- curl https://raw.githubusercontent.com/szefoski/githubhoping/cd538b435785a3e827642440312824b62726e1d2/githubhoping.py --output githubhoping.py
+    - curl https://raw.githubusercontent.com/szefoski/githubhoping/cd538b435785a3e827642440312824b62726e1d2/githubhoping.py --output githubhoping.py
     #delete old release from GitHub
     #- python3 ./githubhoping.py szefoski ci-travis-test $TRAVIS_TAG ${GITHUB_TOKEN}
 deploy:
