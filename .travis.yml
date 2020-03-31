@@ -35,7 +35,7 @@ deploy:
   cleanup: false
   overwrite: true
   name: Jakis tytul
-  release_notes: "cos tam" Jakies notki 
+  release_notes: "cos tam" 
   on:
     tags: true
     condition: $TRAVIS_TAG == "$DEPLOY_TAG_FEATURE" || $TRAVIS_TAG == "$DEPLOY_TAG_DEV" || $TRAVIS_TAG == "$DEPLOY_TAG_STABLE"
