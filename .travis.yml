@@ -10,9 +10,8 @@ install:
   - pip3 install requests
 env:
   global:
-    - DEPLOY_TAG_FEATURE=deploy/feature
-    - DEPLOY_TAG_DEV=deploy/dev
-    - DEPLOY_TAG_STABLE=deploy/stable
+    - TAG_DEPLOY_FEATURE=deploy/feature
+    - RELEASE_NAME_FEATURE="Feature branch build"
 addons:
   sonarcloud:
     organization: "szefoski" # the key of the org you chose at step #3
@@ -28,14 +27,15 @@ before_deploy:
     - curl https://raw.githubusercontent.com/szefoski/githubhoping/cd538b435785a3e827642440312824b62726e1d2/githubhoping.py --output githubhoping.py
     #delete old release from GitHub
     #- python3 ./githubhoping.py szefoski ci-travis-test $TRAVIS_TAG ${GITHUB_TOKEN}
+    - if [[ $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE" ]] ; then echo "Usuwamy"; else echo "Nie usuwamy" ; fi
 deploy:
   provider: releases
   token: ${GITHUB_TOKEN}
   file: ./bin/program2
   cleanup: false
   overwrite: true
-  name: Jakis tytul
-  release_notes: "cos tam" 
+  name: $RELEASE_NAME_FEATURE
+  release_notes: "cos tam"
   on:
     tags: true
-    condition: $TRAVIS_TAG == "$DEPLOY_TAG_FEATURE" || $TRAVIS_TAG == "$DEPLOY_TAG_DEV" || $TRAVIS_TAG == "$DEPLOY_TAG_STABLE"
+    condition: $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE"
