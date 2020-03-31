@@ -36,6 +36,7 @@ deploy:
   overwrite: true
   name: $RELEASE_NAME_FEATURE
   release_notes: "cos tam"
+  edge: true
   on:
     tags: true
     condition: $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE"
