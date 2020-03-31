@@ -35,7 +35,7 @@ deploy:
   cleanup: false
   overwrite: true
   name: $RELEASE_NAME_FEATURE
-  release_notes: "cos tam"
+  release_notes: "cos tam2"
   edge: true
   on:
     tags: true
