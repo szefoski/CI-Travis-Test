@@ -1,4 +1,4 @@
 hellomake: main.o
 	mkdir -p bin
-	$(CXX) -o bin/program main.o
+	$(CXX) -o bin/program2 main.o
 

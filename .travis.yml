@@ -1,10 +1,38 @@
-language: c++
+notifications:
+    email: false
+os: linux
+language: cpp
 compiler: gcc
 dist: trusty
+before_install:
+  - sudo apt-get -y install python3-pip
+install:
+  - pip3 install requests
+env:
+  global:
+    - TAG_DEPLOY_FEATURE=deploy/feature
+    - RELEASE_NAME_FEATURE="Feature branch build"
 addons:
   sonarcloud:
-    organization: "szefoski" # the key of the org you chose at step #3
+    organization: "szefoski"
     token: ${SONAR_TOKEN}
 script:
+    #download a script
+    - mkdir help-tools
+    - curl https://raw.githubusercontent.com/szefoski/githubhoping/c2a14e284cf9d5082631e021edc409cc380b6836/githubhoping.py --output ./help-tools/githubhoping.py
+    #delete old release from GitHub
+    - if [[ $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE" ]] ; then python3 ./help-tools/githubhoping.py szefoski ci-travis-test $TRAVIS_TAG $GITHUB_TOKEN ; fi
     - build-wrapper-linux-x86-64 --out-dir bw-output make
     - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output -X
+deploy:
+  provider: releases
+  token: ${GITHUB_TOKEN}
+  file: ./bin/program2
+  cleanup: false
+  overwrite: true
+  name: $RELEASE_NAME_FEATURE
+  release_notes: "Some release notes"
+  edge: true
+  on:
+    tags: true
+    condition: $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE"
