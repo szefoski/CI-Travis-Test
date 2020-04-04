@@ -14,7 +14,7 @@ env:
     - RELEASE_NAME_FEATURE="Feature branch build"
 addons:
   sonarcloud:
-    organization: "szefoski" # the key of the org you chose at step #3
+    organization: "szefoski"
     token: ${SONAR_TOKEN}
 script:
     #download a script
@@ -22,10 +22,7 @@ script:
     #delete old release from GitHub
     - if [[ $TRAVIS_TAG == "$TAG_DEPLOY_FEATURE" ]] ; then python3 ./githubhoping.py szefoski ci-travis-test $TRAVIS_TAG $GITHUB_TOKEN ; fi
     - build-wrapper-linux-x86-64 --out-dir bw-output make
-    - ls
-    - ls bin
-    - ls bw-output
-    - echo $TRAVIS_TAG
+    - sonar-scanner -Dsonar.cfamily.build-wrapper-output=bw-output -X
 deploy:
   provider: releases
   token: ${GITHUB_TOKEN}
